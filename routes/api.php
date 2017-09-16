@@ -15,3 +15,12 @@ use Illuminate\Http\Request;
 
 Route::post('register','RegisterController@register');
 
+Route::post('login','LoginController@login');
+
+Route::post('refresh','LoginController@refresh');
+
+Route::middleware('auth:api')->group(function() {
+
+	Route::post('logout','LoginController@logout');
+});
+
