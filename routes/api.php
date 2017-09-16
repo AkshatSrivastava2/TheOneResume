@@ -10,4 +10,14 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::post('register','RegisterController@register');
+
+Route::post('login','LoginController@login');
+
+Route::post('refresh','LoginController@refresh');
+
+Route::middleware('auth:api')->group(function() {
+    
+	Route::post('logout','LoginController@logout');
+});
