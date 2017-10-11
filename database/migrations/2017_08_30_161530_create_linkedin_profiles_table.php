@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEducationsTable extends Migration
+class CreateLinkedinProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,18 @@ class CreateEducationsTable extends Migration
     public function up()
     {
         //
-        Schema::create('educations', function (Blueprint $table) {
+        Schema::create('linkedin_profiles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('address_name');
-            $table->string('qualification');
-            $table->string('yearOfPassing');
-            $table->double('percentage',4,2);
+            $table->string('currentlyWorkingAt');
+            $table->string('profileImageUrl');
+            $table->string('currentlyWorkingAs');
+            $table->string('profileUrl');
+            $table->string('summary');
             $table->integer('user_id')->unsigned();
+            $table->rememberToken();
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -36,6 +38,6 @@ class CreateEducationsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('educations');
+        Schema::dropIfExists('linkedin_profiles');
     }
 }

@@ -21,15 +21,19 @@ Route::post('refresh','LoginController@refresh');
 
 Route::middleware('auth:api')->group(function() {
 
-	Route::get('profile/{credentials}','ProfileController@index');
+	Route::get('profile','LinkedInController@index');
 
-	Route::post('profile/store','ProfileController@store');
+	Route::post('profile/store','LinkedInController@store');
 
-	Route::get('profile/{id}/edit','ProfileController@edit');
+	Route::get('profile/{id}/edit','LinkedInController@edit');
 
-	Route::post('profile/{id}/update','ProfileController@update');
+	Route::post('profile/{id}/update','LinkedInController@update');
 
-	Route::get('profile/{id}/delete','ProfileController@destroy');
+	Route::get('profile/{id}/delete','LinkedInController@destroy');
     
 	Route::post('logout','LoginController@logout');
+
 });
+Route::get('user/linkedin', 'LinkedInController@makeRequest');
+
+Route::get('oauth2/linkedin','LinkedInController@getRequest');

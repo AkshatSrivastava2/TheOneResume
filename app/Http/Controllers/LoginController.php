@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -92,12 +93,14 @@ class LoginController extends Controller
     	$accessToken=Auth::user()->token();
 
         //revoking the token 
-    	DB::table('oauth_refresh_tokens')->where('access_token_id',$accessToken)->update(['revoked'=>true]);
+    	//DB::table('oauth_refresh_tokens')->where('access_token_id',$accessToken)->update(['revoked'=>true]);
 
     	$accessToken->revoke();
 
+        Cache::flush();
+
         //returning the response 
-    	return response()->json([],204);
+    	return response()->json(['message'=>'Logged Out'],200);
     }
 
 }
